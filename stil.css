@@ -41,6 +41,9 @@
   }
   h1 { font-size: clamp(2rem, 5.2vw, 3rem); }
   h2 { font-size: clamp(1.45rem, 3.4vw, 1.9rem); }
+  /* Erste Ueberschrift einer Unterseite: fuer Google eine H1, optisch aber
+     unveraendert so gross wie die bisherige H2. */
+  h1.page-h { font-size: clamp(1.45rem, 3.4vw, 1.9rem); }
   h3 { font-size: 1.15rem; margin: 0 0 0.5rem; }
   p { margin: 0 0 1rem; max-width: 44rem; }
 
