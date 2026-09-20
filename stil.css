@@ -334,7 +334,7 @@
   #page-umsatzrechner .hero-num .cap { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.16em; color: var(--on-dark-muted); margin-top: 0.3rem; }
   #page-umsatzrechner .result .sub { text-align: center; color: var(--on-dark-muted); font-size: 0.92rem; margin-top: 0.2rem; }
   #page-umsatzrechner .result .row { display: flex; justify-content: space-between; align-items: baseline; padding: 0.7rem 0; border-bottom: 1px solid rgba(255,255,255,0.12); font-size: 0.98rem; }
-  #page-umsatzrechner .result .row .num { font-variant-numeric: tabular-nums; font-weight: 600; }
+  #page-umsatzrechner .result .row .num { font-variant-numeric: tabular-nums; font-weight: 600; white-space: nowrap; flex: 0 0 auto; }
   #page-umsatzrechner .result .row.minus .num { color: #E9C79B; }
   #page-umsatzrechner .result .row.subtotal { color: var(--on-dark-muted); font-size: 0.9rem; }
   #page-umsatzrechner .result .row.total { border-bottom: none; font-weight: 700; font-size: 1.05rem; }
@@ -344,6 +344,16 @@
   #page-umsatzrechner .calc-btn { display: block; width: max-content; max-width: 100%; margin: 1rem auto 0; text-align: center; }
   #page-umsatzrechner .disclaimer { font-size: 0.8rem; color: var(--muted); margin-top: 1.6rem; line-height: 1.5; max-width: 44rem; }
   #page-umsatzrechner .disclaimer strong { color: var(--ink); }
+  #page-umsatzrechner .hint { font-size: 0.76rem; color: var(--muted); line-height: 1.45; margin: 0.45rem 0 0; }
+  #page-umsatzrechner .more { margin-top: 1.4rem; border-top: 1px solid var(--line); padding-top: 1.1rem; }
+  #page-umsatzrechner .more > summary { list-style: none; cursor: pointer; text-transform: uppercase; letter-spacing: 0.14em; font-size: 0.74rem; font-weight: 650; color: var(--bronze); }
+  #page-umsatzrechner .more > summary::-webkit-details-marker { display: none; }
+  #page-umsatzrechner .more > summary::before { content: "+"; display: inline-block; width: 1.1em; font-size: 1.05em; line-height: 1; }
+  #page-umsatzrechner .more[open] > summary::before { content: "\2013"; }
+  #page-umsatzrechner .more > summary:focus-visible { outline: 2px solid var(--calc-accent); outline-offset: 3px; }
+  #page-umsatzrechner .more .field { margin-top: 1.25rem; margin-bottom: 0; }
+  #page-umsatzrechner .result .row > span:first-child { flex: 1 1 auto; padding-right: 0.9rem; }
+  #page-umsatzrechner .result .row .det { display: block; font-size: 0.76rem; font-weight: 400; color: var(--on-dark-muted); margin-top: 0.15rem; line-height: 1.35; }
 
   /* ---- Cookie-Zustimmung ---- */
   button.btn { border: none; cursor: pointer; font-family: inherit; }

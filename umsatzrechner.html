@@ -108,7 +108,7 @@
   <section id="umsatzrechner">
     <p class="eyebrow">Umsatzrechner</p>
     <h1 class="page-h">Was kann Ihre Wohnung verdienen?</h1>
-    <p class="narrow">Stellen Sie Standort, Größe, Preis und Auslastung ein – und sehen Sie in Echtzeit, welcher Ertrag realistisch drin ist und was nach unserer Betreuung für Sie übrig bleibt.</p>
+    <p class="narrow">Stellen Sie Standort, Größe, Preis, Auslastung und Aufenthaltsdauer ein – und sehen Sie in Echtzeit, welcher Ertrag realistisch drin ist und was nach unserer Betreuung für Sie übrig bleibt.</p>
 
     <div class="calc">
       <div class="panel">
@@ -141,12 +141,45 @@
           <div class="range-scale"><span>25 %</span><span>90 %</span></div>
         </div>
         <div class="field">
+          <label for="dauer">&Oslash; Aufenthaltsdauer <span class="val"><span id="dauerVal"></span></span></label>
+          <input type="range" id="dauer" min="1" max="30" step="1" value="4">
+          <div class="range-scale"><span>1 Nacht</span><span>30 N&auml;chte</span></div>
+          <p class="hint">Messe- und St&auml;dteg&auml;ste bleiben 2 bis 4 N&auml;chte, Monteure und Projektmieten mehrere Wochen. Je l&auml;nger ein Aufenthalt, desto seltener fallen Reinigung und W&auml;sche an.</p>
+        </div>
+        <div class="field">
           <label for="paket">Welches Paket?</label>
           <select id="paket">
             <option value="cohosting" selected>Co-Hosting – Komplettbetreuung (20 %)</option>
             <option value="marketing">Online Marketing (12 %)</option>
           </select>
         </div>
+        <details class="more">
+          <summary>Kosten an Ihr Objekt anpassen</summary>
+          <div class="field">
+            <label for="kRein">Reinigung je Aufenthalt <span class="val"><span id="kReinVal"></span> €</span></label>
+            <input type="range" id="kRein" min="20" max="150" step="5" value="55">
+            <div class="range-scale"><span>20 €</span><span>150 €</span></div>
+            <p class="hint">Vollreinigung inklusive K&uuml;che und Bad. Voreingestellt 45 € f&uuml;r ein Studio, 55 € f&uuml;r zwei Zimmer, 75 € ab drei Zimmern.</p>
+          </div>
+          <div class="field">
+            <label for="kPers">Personen je Aufenthalt <span class="val"><span id="kPersVal"></span></span></label>
+            <input type="range" id="kPers" min="1" max="8" step="1" value="3">
+            <div class="range-scale"><span>1 Person</span><span>8 Personen</span></div>
+            <p class="hint">Jede Person braucht ein eigenes W&auml;scheset. Voreingestellt zwei Personen im Studio, drei bei zwei Zimmern, vier ab drei Zimmern.</p>
+          </div>
+          <div class="field">
+            <label for="kSet">W&auml;sche je Person <span class="val"><span id="kSetVal"></span> €</span></label>
+            <input type="range" id="kSet" min="5" max="15" step="0.5" value="8.5">
+            <div class="range-scale"><span>5 €</span><span>15 €</span></div>
+            <p class="hint">Ein Set Bettw&auml;sche und Handt&uuml;cher kostet im Waschen, Trocknen und B&uuml;geln rund 7 bis 10 €.</p>
+          </div>
+          <div class="field">
+            <label for="gGebuehr">Reinigungsgeb&uuml;hr f&uuml;r G&auml;ste <span class="val"><span id="gGebuehrVal"></span> €</span></label>
+            <input type="range" id="gGebuehr" min="0" max="150" step="5" value="55">
+            <div class="range-scale"><span>0 €</span><span>150 €</span></div>
+            <p class="hint">Was G&auml;ste je Aufenthalt zus&auml;tzlich zahlen. Der Betrag z&auml;hlt zum Umsatz – die Portale behalten davon ihre Provision ein.</p>
+          </div>
+        </details>
       </div>
 
       <div class="panel result">
@@ -163,9 +196,12 @@
         </div>
         <div class="sub" id="nettoSub">–</div>
         <div style="margin-top:1.3rem">
-          <div class="row"><span id="lblUmsatz">Geschätzter Umsatz</span><span class="num" id="umsatz">–</span></div>
-          <div class="row minus"><span>Plattformgebühren (ca.&nbsp;15&nbsp;%)</span><span class="num" id="platform">–</span></div>
-          <div class="row minus"><span>Reinigung &amp; Wäsche (ca.&nbsp;3&nbsp;%)</span><span class="num" id="reinigung">–</span></div>
+          <div class="row"><span>Übernachtungsumsatz<small class="det" id="detMiete"></small></span><span class="num" id="miete">–</span></div>
+          <div class="row"><span>Reinigungsgebühren der Gäste<small class="det" id="detGebuehren"></small></span><span class="num" id="gebuehren">–</span></div>
+          <div class="row subtotal"><span>Gesamtumsatz</span><span class="num" id="umsatz">–</span></div>
+          <div class="row minus"><span>Plattformgebühren<small class="det">Airbnb und Booking.com – volle Provision, ca. 15&nbsp;% vom Gesamtumsatz</small></span><span class="num" id="platform">–</span></div>
+          <div class="row minus"><span>Reinigung<small class="det" id="detReinigung"></small></span><span class="num" id="reinigung">–</span></div>
+          <div class="row minus"><span>Wäsche<small class="det" id="detWaesche"></small></span><span class="num" id="waesche">–</span></div>
           <div class="row subtotal"><span>Bereinigter Nettoumsatz</span><span class="num" id="nettoumsatz">–</span></div>
           <div class="row minus"><span id="provLbl">Unsere Betreuung (20&nbsp;% v. Netto)</span><span class="num" id="provision">–</span></div>
           <div class="row total"><span>Ihr Netto-Ertrag</span><span class="num" id="nettoRow">–</span></div>
@@ -176,7 +212,7 @@
       </div>
     </div>
 
-    <p class="disclaimer"><strong>Unverbindliche Schätzung.</strong> Die Werte beruhen auf vorsichtigen Durchschnittsannahmen für die Region Hannover und dienen der Orientierung. Plattformgebühren (ca.&nbsp;15&nbsp;%) sind als Schätzwert bereits abgezogen; die Reinigung zahlen Gäste üblicherweise als separate Gebühr, daher ist dafür nur ein kleiner Restkostenanteil (ca.&nbsp;3&nbsp;%) angesetzt. Unsere Betreuung berechnen wir fair nur auf den bereinigten Nettoumsatz. Der tatsächliche Ertrag hängt von Objekt, Ausstattung, Saison und Zweckentfremdungsregeln ab; Steuern sind nicht berücksichtigt. Eine konkrete Einschätzung für Ihre Wohnung erhalten Sie kostenlos im persönlichen Gespräch.</p>
+    <p class="disclaimer"><strong>Unverbindliche Schätzung.</strong> Die Werte beruhen auf vorsichtigen Durchschnittsannahmen für die Region Hannover und dienen der Orientierung. Reinigung und Wäsche fallen je Aufenthalt an, nicht als Prozentsatz vom Umsatz: angesetzt sind eine Vollreinigung für 45&nbsp;€ (Studio), 55&nbsp;€ (2 Zimmer) oder 75&nbsp;€ (ab 3 Zimmern) sowie ein Wäscheset je Person zu rund 8,50&nbsp;€ (voreingestellt zwei bis vier Personen je Aufenthalt). Voreingestellt zahlen Gäste eine Reinigungsgebühr in Höhe der Reinigungskosten – die Wäsche bleibt damit bei Ihnen. Diese Gebühr zählt zum Umsatz, deshalb rechnen wir die Plattformgebühren auf den Gesamtumsatz – angesetzt ist die volle Provision von rund 15&nbsp;%, wie sie Airbnb und Booking.com berechnen. Alle Beträge können Sie unter „Kosten an Ihr Objekt anpassen“ auf Ihre eigenen Zahlen ändern. Unsere Betreuung berechnen wir fair nur auf den bereinigten Nettoumsatz, also nach Plattformgebühren, Reinigung und Wäsche. Nicht enthalten sind Nebenkosten wie Strom, Heizung und Internet, Verbrauchsmaterial, Abnutzung und Steuern. Der tatsächliche Ertrag hängt von Objekt, Ausstattung, Saison und Zweckentfremdungsregeln ab. Eine konkrete Einschätzung für Ihre Wohnung erhalten Sie kostenlos im persönlichen Gespräch.</p>
   </section>
 </div>
 </div>
